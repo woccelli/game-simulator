@@ -3,3 +3,4 @@ game_simulator.egg-info
 .pytest_chache
 poetry.lock
 pyproject.toml
+local-commands.txt

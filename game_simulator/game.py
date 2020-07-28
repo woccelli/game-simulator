@@ -5,8 +5,12 @@ class Game:
   def __init__(self, players, nbTurns):
     self.players = players
     self.nbTurns = nbTurns
-    self.turns = []
+    self.turns = [] #index 0 : initial state, index n : turn n
+    self.isPlayed = False
 
+  #Play -nbTurns- squentially
+  #Store the played turns into -turns-
+  #Update the current -players- with the last played turn
   def play(self):
     players = self.players
     t = Turn(players)
@@ -16,17 +20,14 @@ class Game:
       t.play()
       players = t.players
       self.turns.append(t)
+    self.isPlayed = True
 
-  def count_players_by_type(self, turn_nb):
-    attackers = 0
-    defenders = 0
-    if turn_nb < len(self.turns):
-      players_of_turn = self.turns[turn_nb].players
-      for p in players_of_turn:
-        if p.get_player_type() == "Defender":
-          defenders += 1
-        elif p.get_player_type() == "Attacker":
-          attackers += 1
-    return [defenders, attackers]
+  def get_players_evolution(self):
+    assert self.isPlayed
+    players_evolution = []
+    for t in self.turns:
+      players_evolution.append(t.count_players_by_type())
+    return players_evolution
+  
 
 
