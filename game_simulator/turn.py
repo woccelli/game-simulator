@@ -1,7 +1,8 @@
 from random import shuffle
 
 class Turn:
-  def __init__(self, players):
+  def __init__(self, id, players):
+    self.id = id
     self.players = list(players)
     self.isPlayed = False
     shuffle(self.players)
@@ -37,4 +38,4 @@ class Turn:
         defenders += 1
       elif p.get_player_type() == "Attacker":
         attackers += 1
-    return {"Defenders":defenders, "Attackers": attackers}
+    return {"Turn": self.id, "Defenders":defenders, "Attackers": attackers}

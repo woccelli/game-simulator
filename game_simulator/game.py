@@ -1,5 +1,6 @@
 
 from game_simulator.turn import Turn
+from game_simulator.iohandler import write_dict_to_csv_file
 
 class Game:
   def __init__(self, players, nbTurns):
@@ -13,10 +14,10 @@ class Game:
   #Update the current -players- with the last played turn
   def play(self):
     players = self.players
-    t = Turn(players)
+    t = Turn(0,players)
     self.turns.append(t)
-    for i in range(self.nbTurns):
-      t = Turn(players)
+    for i in range(1,self.nbTurns+1):
+      t = Turn(i,players)
       t.play()
       players = t.players
       self.turns.append(t)
@@ -28,6 +29,14 @@ class Game:
     for t in self.turns:
       players_evolution.append(t.count_players_by_type())
     return players_evolution
+
+  def export_game_results(self):
+    assert self.isPlayed
+    players_evolution = self.get_players_evolution()
+    csv_file = "game_results.csv"
+    csv_columns = ["Turn", "Defenders","Attackers"]
+    write_dict_to_csv_file(csv_file, players_evolution, csv_columns)
+
   
 
 
