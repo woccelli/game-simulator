@@ -2,6 +2,7 @@
 from game_simulator.turn import Turn
 from game_simulator.iohandler import write_dict_to_csv_file
 
+
 class Game:
   def __init__(self, players, nbTurns):
     self.players = players
@@ -36,7 +37,5 @@ class Game:
     csv_file = "game_results.csv"
     csv_columns = ["Turn", "Defenders","Attackers"]
     write_dict_to_csv_file(csv_file, players_evolution, csv_columns)
-
-  
 
 

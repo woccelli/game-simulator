@@ -1,5 +1,6 @@
 from .context import Attacker
 from .context import Defender
+from .context import create_n_attackers
 
 def test_confront():
   p1 = Attacker(1, 0.8)
@@ -31,3 +32,9 @@ def test_attack_noattack():
   p1 =Defender(1,4,0.5)
   p2 = Attacker(2,0)
   assert p2.attack(p1) == 0
+
+def test_create_n_attackers():
+  attackers = create_n_attackers(100,1,100)
+  assert len(attackers) == 100
+  assert attackers[50].id == 150
+  assert attackers[75].attack_probability == 1

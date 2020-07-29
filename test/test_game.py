@@ -39,4 +39,3 @@ def test_get_players_evolution():
   game = Game(players,nb_turns)
   game.play()
   game.export_game_results()
-  

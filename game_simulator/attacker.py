@@ -36,3 +36,10 @@ class Attacker(Player):
     else: #do not attack
       return 0
 
+#duplicate of this method in defender.py
+def create_n_attackers(n, attack_probability, offset=0):
+  attackers = []
+  for i in range(offset,n+offset):
+    d = Attacker(i,attack_probability)
+    attackers.append(d)
+  return attackers

@@ -1,5 +1,6 @@
 from .context import Defender
 from .context import Attacker
+from .context import create_n_defenders
 
 def test_init_devices():
   defender1 = Defender(5)
@@ -23,3 +24,10 @@ def test_create_similar_player():
   assert p2.rs_nb == 6
   assert p2.hp_proportion == 0.5
   assert p2.get_player_type() == "Defender"
+
+def test_create_n_defenders():
+  defenders = create_n_defenders(100,4, 0.5)
+  assert len(defenders) == 100
+  assert defenders[50].id == 50
+  assert defenders[75].rs_nb == 4
+  assert defenders[0].hp_proportion == 0.5

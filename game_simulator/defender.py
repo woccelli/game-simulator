@@ -33,3 +33,12 @@ class Defender(Player):
 
   def get_player_type(self):
     return "Defender"
+
+#duplicate of this method in attacker.py
+def create_n_defenders(n, rs_nb, hp_proportion, offset=0):
+  defenders = []
+  for i in range(offset,n+offset):
+    d = Defender(i,rs_nb,hp_proportion)
+    defenders.append(d)
+  return defenders
+  
