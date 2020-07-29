@@ -3,10 +3,8 @@ from .context import Attacker
 
 def test_init_devices():
   defender1 = Defender(5)
-  defender1.init_devices()
   assert defender1.devices == [True] 
   defender2 = Defender(5, 3, 0.33)
-  defender2.init_devices()
   assert len(defender2.devices) == 4
   assert defender2.devices.count(False) == 1
   assert defender2.devices.count(True) == 3
@@ -14,7 +12,7 @@ def test_init_devices():
 def test_confront():
   p1 = Defender(1)
   p2 = Defender(2)
-  p3 = Attacker(3, 0.9)
+  p3 = Attacker(3, 1)
   assert p1.confront(p2)==0
   assert p1.confront(p3)==-1
 

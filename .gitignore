@@ -4,3 +4,4 @@ game_simulator.egg-info
 poetry.lock
 pyproject.toml
 local-commands.txt
+game_results.csv

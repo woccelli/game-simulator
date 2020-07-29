@@ -2,10 +2,11 @@ from random import shuffle
 from game_simulator.player import Player
 
 class Defender(Player):
-  def __init__(self, id, rs_nb=1, hp_propotion=0):
+  def __init__(self, id, rs_nb=1, hp_proportion=0):
     super().__init__(id)
     self.rs_nb = rs_nb
-    self.hp_proportion = hp_propotion
+    self.hp_proportion = hp_proportion
+    self.init_devices()
 
   def init_devices(self):
     self.hp_nb = int(self.rs_nb* self.hp_proportion/(1- self.hp_proportion))
