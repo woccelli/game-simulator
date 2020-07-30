@@ -1,6 +1,6 @@
 from .context import Turn
-from game_simulator.defender import Defender
-from game_simulator.attacker import Attacker
+from .context import Defender
+from .context import Attacker
 
 def test_play():
   p1 = Defender(1,2)

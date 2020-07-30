@@ -2,6 +2,7 @@ from .context import Game
 from .context import Defender
 from .context import Attacker
 from .context import mocker
+from .context import create_n_attackers, create_n_defenders
 
 def test_play():
   p1 = Attacker(1, 0.8)
@@ -39,3 +40,11 @@ def test_get_players_evolution():
   game = Game(players,nb_turns)
   game.play()
   game.export_game_results()
+
+def test_game(): 
+  defs = create_n_defenders(100,4,0.7)
+  atks = create_n_attackers(100,0.7,100)
+  players = defs + atks
+  g = Game(players,100)
+  g.play()
+  g.export_game_results()

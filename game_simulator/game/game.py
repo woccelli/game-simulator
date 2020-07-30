@@ -1,6 +1,6 @@
 
-from game_simulator.turn import Turn
-from game_simulator.iohandler import write_dict_to_csv_file
+from .turn import Turn
+from .iohandler import write_dict_to_csv_file
 
 
 class Game:

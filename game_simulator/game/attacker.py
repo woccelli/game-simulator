@@ -1,5 +1,5 @@
-from game_simulator.defender import Defender
-from game_simulator.player import Player
+from .defender import Defender
+from .player import Player
 import random
 
 class Attacker(Player):

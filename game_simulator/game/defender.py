@@ -1,5 +1,5 @@
 from random import shuffle
-from game_simulator.player import Player
+from .player import Player
 
 class Defender(Player):
   def __init__(self, id, rs_nb=1, hp_proportion=0):
