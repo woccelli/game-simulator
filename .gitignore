@@ -5,3 +5,5 @@ poetry.lock
 pyproject.toml
 local-commands.txt
 game_results.csv
+*.csv
+.~*

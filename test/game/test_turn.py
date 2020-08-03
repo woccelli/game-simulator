@@ -15,17 +15,6 @@ def test_play():
       i+=1
   assert i == 2
 
-def test_count_players_by_type():
-  p1 = Attacker(1, 0.8)
-  p2 = Attacker(2, 0.7)
-  p3 = Defender(3)
-  players = [p1,p2,p3]
-  t = Turn(0,players)
-  players_nb = t.count_players_by_type()
-  assert players_nb["Turn"] == 0
-  assert players_nb["Defenders"] == 1
-  assert players_nb["Attackers"] == 2
-
 def test_count_players_by_name():
   p1 = Attacker(1, 0.8, 'Attacker1')
   p2 = Attacker(2, 0.7, 'Attacker2')
@@ -36,10 +25,13 @@ def test_count_players_by_name():
   p7 = Defender(7)
   players = [p1,p2,p3,p4,p5,p6,p7]
   t = Turn(0,players)
-  players_nb = t.count_players_by_name()
-  assert players_nb["Turn"] == 0
-  assert players_nb["Attacker1"] == 1
-  assert players_nb["Attacker2"] == 1
-  assert players_nb["Attacker3"] == 1
-  assert players_nb['Def1'] == 3
-  assert players_nb['Defender'] == 1
+  t.count_players()
+  assert t.id == 0
+  assert t.nb_attackers == 3
+  assert t.nb_defenders == 4
+  assert t.nb_by_name['Turn'] == 0
+  assert t.nb_by_name["Attacker1"] == 1
+  assert t.nb_by_name["Attacker2"] == 1
+  assert t.nb_by_name["Attacker3"] == 1
+  assert t.nb_by_name['Def1'] == 3
+  assert t.nb_by_name['Defender'] == 1

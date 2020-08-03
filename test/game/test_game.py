@@ -14,7 +14,7 @@ def test_play():
   nb_turns = 5
   game = Game(players,nb_turns)
   game.play()
-  assert len(game.turns) == 6
+  assert len(game.turns) <= 6
 
 def test_get_players_evolution():
   p1 = Attacker(1, 0.8)
@@ -27,7 +27,7 @@ def test_get_players_evolution():
   game = Game(players,nb_turns)
   game.play()
   pev = game.get_players_evolution()
-  assert len(pev) == 6
+  assert len(pev) <= 6
 
 def test_get_players_evolution():
   p1 = Attacker(1, 0.8)

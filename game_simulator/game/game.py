@@ -31,21 +31,24 @@ class Game:
     self.isPlayed = False
 
   def play(self):
-    """Simulates the encounter of all players over nbTurns turns and updates the players at each turn.
+    """Simulates the encounter of all players over maximum nbTurns turns and updates the players at each turn.
 
-    For each turn, 
+    For each turn until there are no more attackers or defenders, or the nbTurns is reached, 
       Create the turn with the self.players attribute as input.
       Play the turn and update the self.players attribute with the new players of the turn.
       Store the played turn in the self.turns attribute.
     """
     players = self.players
     t = Turn(0,players)
+    t.count_players()
     self.turns.append(t)
     for i in range(1,self.nbTurns+1):
       t = Turn(i,players)
       t.play()
       players = t.players
       self.turns.append(t)
+      if t.nb_attackers == 0 or t.nb_defenders ==0:
+        break
     self.isPlayed = True
 
   def get_players_evolution_type(self):
@@ -54,7 +57,7 @@ class Game:
     assert self.isPlayed
     players_evolution = []
     for t in self.turns:
-      players_evolution.append(t.count_players_by_type())
+      players_evolution.append({'Turn':t.id, 'Defenders':t.nb_defenders, 'Attackers':t.nb_attackers})
     return players_evolution
 
   def export_game_results_type(self):
@@ -72,7 +75,7 @@ class Game:
     assert self.isPlayed
     players_evolution = []
     for t in self.turns:
-      players_evolution.append(t.count_players_by_name())
+      players_evolution.append(t.nb_by_name)
     return players_evolution
 
   def export_game_results_name(self):

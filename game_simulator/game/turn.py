@@ -23,6 +23,9 @@ class Turn:
     self.players = list(players)
     self.isPlayed = False
     shuffle(self.players)
+    self.nb_attackers = 0
+    self.nb_defenders = 0
+    self.nb_by_name = {'Turn':self.id}
 
   def play(self):
     """Simulates the encounter of all the players and updates the players accordingly.
@@ -46,28 +49,21 @@ class Turn:
           self.players[i+1] = self.players[i].create_similar_player(self.players[i+1].id)
         if res == -1 :
           self.players[i] = self.players[i+1].create_similar_player(self.players[i].id)
+    self.count_players()
     self.isPlayed = True
 
-  def count_players_by_type(self):
-    """Count the number of players, classified by type, in the current self.players attribute.
+  def count_players(self):
+    """From the self.players, counts the number of players by type and by name.
     """
-    attackers = 0
-    defenders = 0
     for p in self.players:
+      #Count by type
       if p.get_player_type() == "Defender":
-        defenders += 1
+        self.nb_defenders += 1
       elif p.get_player_type() == "Attacker":
-        attackers += 1
-    return {"Turn": self.id, "Defenders":defenders, "Attackers": attackers}
-
-  def count_players_by_name(self):
-    """Count the number of players, classified by name, in the current self.players attribute.
-    """
-    turn_players_count = {'Turn':self.id}
-    for p in self.players:
+        self.nb_attackers += 1
+      #Count by name
       name = p.name
-      if name in turn_players_count:
-        turn_players_count[name] += 1
+      if name in self.nb_by_name:
+        self.nb_by_name[name] += 1
       else:
-        turn_players_count[name] = 1
-    return turn_players_count
+        self.nb_by_name[name] = 1
