@@ -11,11 +11,16 @@ def test_init_devices():
   assert defender2.devices.count(True) == 3
 
 def test_confront():
-  p1 = Defender(1)
-  p2 = Defender(2)
+  p1 = Defender(1,4,0.8,30)
+  p2 = Defender(2,4,0.2,30)
   p3 = Attacker(3, 1)
-  assert p1.confront(p2)==0
-  assert p1.confront(p3)==-1
+  p4 = Defender(4,4,0.8,30)
+  p5 = Defender(5,4,0.75,50)
+  assert p1.confront(p2)==-1
+  assert p1.confront(p3)!=0
+  assert p1.confront(p4)==0
+  assert p1.confront(p5)==1
+
 
 def test_create_similar_player():
   p1 = Defender(1,6,0.5)

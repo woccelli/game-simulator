@@ -25,3 +25,21 @@ def test_count_players_by_type():
   assert players_nb["Turn"] == 0
   assert players_nb["Defenders"] == 1
   assert players_nb["Attackers"] == 2
+
+def test_count_players_by_name():
+  p1 = Attacker(1, 0.8, 'Attacker1')
+  p2 = Attacker(2, 0.7, 'Attacker2')
+  p3 = Attacker(3, 0.7, 'Attacker3')
+  p4 = Defender(4,name='Def1')
+  p5 = Defender(5,name='Def1')
+  p6 = Defender(6,name='Def1')
+  p7 = Defender(7)
+  players = [p1,p2,p3,p4,p5,p6,p7]
+  t = Turn(0,players)
+  players_nb = t.count_players_by_name()
+  assert players_nb["Turn"] == 0
+  assert players_nb["Attacker1"] == 1
+  assert players_nb["Attacker2"] == 1
+  assert players_nb["Attacker3"] == 1
+  assert players_nb['Def1'] == 3
+  assert players_nb['Defender'] == 1

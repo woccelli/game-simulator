@@ -39,12 +39,22 @@ def test_get_players_evolution():
   nb_turns = 5
   game = Game(players,nb_turns)
   game.play()
-  game.export_game_results()
+  game.export_game_results_type()
 
-def test_game(): 
+def test_game_type(): 
   defs = create_n_defenders(100,4,0.7)
   atks = create_n_attackers(100,0.7,100)
   players = defs + atks
   g = Game(players,100)
   g.play()
-  g.export_game_results()
+  g.export_game_results_type()
+
+def test_game_name(): 
+  defs1 = create_n_defenders(100,4,hp_proportion=0.8, hp_unit_cost=30, name="def1")
+  defs2 = create_n_defenders(100,4,hp_proportion=0.2, hp_unit_cost=30, offset=100, name="def2")
+  atks1 = create_n_attackers(70,0.7,offset =200, name="atk1")
+  atks2 = create_n_attackers(30,0.5,offset =270, name="atk2")
+  players = defs1 + atks1 + defs2 + atks2
+  g = Game(players,100)
+  g.play()
+  g.export_game_results_name()

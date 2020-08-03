@@ -20,18 +20,18 @@ def test_create_similar_player():
 def test_attack_simple():
   p1 = Defender(1,5,0)
   p2 = Attacker(2,1)
-  assert p2.attack(p1) == 1
+  assert p2.confront_defender(p1) == 1
 
 def test_attack():
   p1 =Defender(1,4,0.5)
   p2 = Attacker(2,1)
   for i in range(100):
-    assert p2.attack(p1) != 0
+    assert p2.confront_defender(p1) != 0
 
 def test_attack_noattack():
   p1 =Defender(1,4,0.5)
   p2 = Attacker(2,0)
-  assert p2.attack(p1) == 0
+  assert p2.confront_defender(p1) == 0
 
 def test_create_n_attackers():
   attackers = create_n_attackers(100,1,100)
