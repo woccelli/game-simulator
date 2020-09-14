@@ -47,14 +47,46 @@ def test_game_type():
   players = defs + atks
   g = Game(players,100)
   g.play()
-  g.export_game_results_type()
+  g.export_game_results_type("game_results_type.csv")
 
 def test_game_name(): 
-  defs1 = create_n_defenders(100,4,hp_proportion=0.8, hp_unit_cost=30, name="def1")
-  defs2 = create_n_defenders(100,4,hp_proportion=0.2, hp_unit_cost=30, offset=100, name="def2")
-  atks1 = create_n_attackers(70,0.7,offset =200, name="atk1")
-  atks2 = create_n_attackers(30,0.5,offset =270, name="atk2")
-  players = defs1 + atks1 + defs2 + atks2
+  defs1 = create_n_defenders(1000,4,hp_proportion=0.5, hp_unit_cost=30, name="def1")
+  defs2 = create_n_defenders(1000,4,hp_proportion=0.2, hp_unit_cost=30, offset=1000, name="def2")
+  defs3 = create_n_defenders(1000,4,hp_proportion=0.8, hp_unit_cost=30, offset=2000, name="def3")
+  atks1 = create_n_attackers(1000,0.7,offset =3000, name="atk1")
+  players = defs1 + atks1 + defs2  + defs3
+  g = Game(players,1000)
+  g.play()
+  g.export_game_results_name("game_results_name.csv")
+
+def test_game_name_freq(): 
+  defs1 = create_n_defenders(1000,10,hp_proportion=0.5, hp_unit_cost=30, name="def1")
+  atks1 = create_n_attackers(1000,0.9,offset =1000, name="atk1")
+  players = defs1 + atks1 
+  g = Game(players,100000)
+  g.play()
+  g.export_game_results_name("game_results_name_freq1.csv")
+  defs1 = create_n_defenders(1000,10,hp_proportion=0.5, hp_unit_cost=30, name="def1")
+  atks1 = create_n_attackers(1000,0.1,offset =1000, name="atk1")
+  players = defs1 + atks1 
+  g = Game(players,100000)
+  g.play()
+  g.export_game_results_name("game_results_name_freq2.csv")
+
+def test_nb_turns_and_winner_type():
+  defs = create_n_defenders(1,3,0)
+  atks = create_n_attackers(1,1,1)
+  players = defs + atks
   g = Game(players,100)
   g.play()
-  g.export_game_results_name()
+  assert g.get_nb_turns_played() == 1
+  assert g.get_winner_type() == "Attacker"
+
+def test_nb_turns_and_winner_name():
+  defs = create_n_defenders(1,3,0)
+  atks = create_n_attackers(1,1,1, name="Winner")
+  players = defs + atks
+  g = Game(players,100)
+  g.play()
+  assert g.get_nb_turns_played() == 1
+  assert g.get_winner_name() == "Winner"

@@ -60,12 +60,11 @@ class Game:
       players_evolution.append({'Turn':t.id, 'Defenders':t.nb_defenders, 'Attackers':t.nb_attackers})
     return players_evolution
 
-  def export_game_results_type(self):
+  def export_game_results_type(self, csv_file):
     """Exports the number of players, classified by type, for each turn, into a csv file.
     """
     assert self.isPlayed
     players_evolution = self.get_players_evolution_type()
-    csv_file = "game_results_type.csv"
     csv_columns = ["Turn", "Defenders","Attackers"]
     write_dict_to_csv_file(csv_file, players_evolution, csv_columns)
 
@@ -78,12 +77,31 @@ class Game:
       players_evolution.append(t.nb_by_name)
     return players_evolution
 
-  def export_game_results_name(self):
+  def export_game_results_name(self, csv_file):
     """Exports the number of players, classified by type, for each turn, into a csv file.
     """
     assert self.isPlayed
     players_evolution = self.get_players_evolution_name()
-    csv_file = "game_results_name.csv"
     csv_columns = sorted(players_evolution[0].keys())
     write_dict_to_csv_file(csv_file, players_evolution, csv_columns)
+  
+  def get_nb_turns_played(self):
+    assert self.isPlayed
+    return len(self.turns) -1
+  
+  def get_winner_type(self):
+    assert self.isPlayed
+    if self.turns[-1].nb_attackers == 0:
+      return "Defender"
+    elif self.turns[-1].nb_defenders == 0:
+      return "Attacker"
+
+  def get_winner_name(self):
+    assert self.isPlayed
+    last_turn_nbs = self.turns[-1].nb_by_name
+    last_turn_nbs.pop("Turn")
+    return max(last_turn_nbs, key=last_turn_nbs.get)
+
+
+
 
